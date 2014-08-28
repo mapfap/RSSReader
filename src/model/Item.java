@@ -8,6 +8,10 @@ public class Item {
 	private String guid;
 	private String pubDate;
 	
+	public Item() {
+		
+	}
+	
 	public String getTitle() {
 		return title;
 	}

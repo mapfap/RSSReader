@@ -12,6 +12,10 @@ public class Channel {
 	private String ttl;
 	List<Item> items;
 	
+	public Channel() {
+		
+	}
+	
 	public String getTitle() {
 		return title;
 	}
