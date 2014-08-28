@@ -2,6 +2,11 @@ package model;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
+@XmlAccessorType (XmlAccessType.FIELD)
 public class Channel {
 	
 	private String title;
@@ -10,7 +15,9 @@ public class Channel {
 	private String lastBuildDate;
 	private String pubDate;
 	private String ttl;
-	List<Item> items;
+	
+	@XmlElement(name = "item")
+	private List<Item> items;
 	
 	public Channel() {
 		
@@ -64,4 +71,13 @@ public class Channel {
 	public void setTtl(String ttl) {
 		this.ttl = ttl;
 	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
 }

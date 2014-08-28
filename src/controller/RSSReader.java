@@ -25,9 +25,10 @@ public class RSSReader {
 		return null;
 	}
 
+	// Test JAXB
 	public static void main(String[] args) {
 		RSS rss = (new RSSReader()).getRSS();
-		System.out.println(rss.getChannel().getTitle());
+		System.out.println(rss.getChannel().getItems().get(0).getDescription());
 	}
 
 
