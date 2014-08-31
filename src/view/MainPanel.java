@@ -1,15 +1,23 @@
 package view;
 
-import java.awt.Button;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.xml.bind.JAXBException;
+
+import model.Channel;
+import model.Item;
+import model.RSS;
+import controller.RSSReader;
 
 /**
  * 
@@ -21,6 +29,8 @@ public class MainPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Font font;
 	private boolean isFontConflicted;
+	
+//	private
 
 	private void loadFont() {
 		try {
@@ -32,52 +42,80 @@ public class MainPanel extends JPanel {
 		} catch (IOException|FontFormatException e) {
 			e.printStackTrace();
 		}
+		
+		if ( isFontConflicted ) {
+			setFont(new Font("ThaiSans Neue", Font.BOLD, 10));
+		} else {
+			setFont(font);
+		}
 	}
 
 	public MainPanel() {
 
 		loadFont();
+		setPreferredSize(new Dimension( 600, 10000));
+		
+		RSSReader rssReader = RSSReader.getInstance();
+		
+		try {
+			RSS rss = rssReader.getRSS();
+			Channel channel = rss.getChannel();
+			for (Item item : channel.getItems() )  {
+				addFeedItem(item);
+			}
+			
+		} catch (JAXBException e) {
+			JOptionPane.showMessageDialog(null, e.toString());
+		}
+	}
 
+	private void addFeedItem(Item item) {
 		String html = "<html>"
 				+ "<div style='"
 				+ "background: #b3b3b3;"
 				+ "width: 480px;"
 				+ "padding: 10px;"
-				+ "font-size: 30px;"
+				+ "font-size: 22px;"
 				+ "'>"
 				+ ""
-				+ "Abuse report police chief to stay [FULL]"
+				+ item.getTitle()
 				+ "</div>"
 				+ "<div style='"
-				+ "background: #d2d2d2;"
+				+ "background: #e2e2e2;"
 				+ "width: 480px;"
 				+ "padding: 10px;"
-				+ "font-size: 18px;"
+				+ "font-size: 16px;"
 
 				+ "'>"
-
-				+ "The Police and Crime Commissioner for South Yorkshire vows to stay in the job despite calls for him to quit over a damning report into child abuse in Rotherham."
+				+ item.getDescription()
 				+ " see more.."
 				+ "</div>"
 
    			+ "</html>";
+		
+		JLabel feedItem = new JLabel(html); 
+		feedItem.addMouseListener(new LabelListener(feedItem) {
 
-		JLabel feedBox = new JLabel(html);
-		add(new JLabel("Enter URL of the RSS feed"));
+			@Override
+			public void mouseClicked(MouseEvent e) { }
 
-		JTextField urlTextField = new JTextField(35);
+			@Override
+			public void mousePressed(MouseEvent e) {
+				this.getLabel().setText("CLICKED");
+			}
 
-		if ( isFontConflicted ) {
-			feedBox.setFont(new Font("ThaiSans Neue", Font.BOLD, 10));
-			urlTextField.setFont(new Font("ThaiSans Neue", Font.BOLD, 25));
-		} else {
-			feedBox.setFont(font);
-			urlTextField.setFont(font);
-		}
+			@Override
+			public void mouseReleased(MouseEvent e) { }
 
-		add(urlTextField);
-		add(new Button("Fetch"));
-		add(feedBox);
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				setCursor (Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) { }
+			
+		});
+		add(feedItem);
 	}
-
 }
