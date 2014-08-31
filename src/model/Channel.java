@@ -7,6 +7,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType (XmlAccessType.FIELD)
+
+/**
+ * Channel data model of rss element.
+ * 
+ * @author Sarun Wongtanakarn 5510546166
+ *
+ */
 public class Channel {
 	
 	private String title;

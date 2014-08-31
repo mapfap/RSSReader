@@ -18,6 +18,7 @@ import model.RSS;
 import controller.RSSReader;
 
 /**
+ * Main panel of the program, fetch and show the list of items.
  * 
  * @author Sarun Wongtanakarn 5510546166
  *

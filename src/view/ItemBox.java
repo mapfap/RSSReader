@@ -8,19 +8,26 @@ import javax.swing.JLabel;
 
 import model.Item;
 
+/**
+ * Box of UI that holds an Item of rss.
+ * It can be expanded and collapsed by clicking.
+ * 
+ * @author Sarun Wongtanakarn 5510546166
+ *
+ */
 public class ItemBox extends JLabel implements MouseListener {
-	
+
 	private static final long serialVersionUID = 2361705357295173302L;
 	private final Item item;
 	private boolean isExpanding;
-	
+
 	public ItemBox(Item item) {
 		super();
 		this.item = item;
 		addMouseListener(this);
 		collapse();
 	}
-	
+
 	private String getHeader(String hexColor) {
 		return 	"<div style='"
 				+ "background: #" + hexColor + ";"
@@ -28,7 +35,6 @@ public class ItemBox extends JLabel implements MouseListener {
 				+ "padding: 10px;"
 				+ "font-size: 22px;"
 				+ "'>"
-				+ ""
 				+ item.getTitle()
 				+ "</div>";
 	}
@@ -61,7 +67,6 @@ public class ItemBox extends JLabel implements MouseListener {
 				+ "width: 480px;"
 				+ "padding: 10px;"
 				+ "font-size: 16px;"
-
 				+ "'>"
 				+ item.getDescription()
 				+ "</div>";
@@ -73,14 +78,10 @@ public class ItemBox extends JLabel implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		
-	}
+	public void mousePressed(MouseEvent e) { }
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		
-	}
+	public void mouseReleased(MouseEvent e) { }
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
@@ -96,5 +97,5 @@ public class ItemBox extends JLabel implements MouseListener {
 			setData(getHeader("b3b3b3"));
 		}
 	}
-	
+
 }

@@ -4,6 +4,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 @XmlAccessorType (XmlAccessType.FIELD)
+
+/**
+ * Item data model of rss element.
+ * 
+ * @author Sarun Wongtanakarn 5510546166
+ *
+ */
 public class Item {
 	
 	private String title;

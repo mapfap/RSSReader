@@ -8,6 +8,12 @@ import javax.xml.bind.Unmarshaller;
 
 import model.RSS;
 
+/**
+ * Read the rss from any source, unmarshal to convert xml to object using JAXB.
+ * 
+ * @author Sarun Wongtanakarn 5510546166
+ *
+ */
 public class RSSReader {
 
 	private static RSSReader instance = null;

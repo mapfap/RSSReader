@@ -7,6 +7,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+
+/**
+ * RSS data model.
+ * 
+ * @author Sarun Wongtanakarn 5510546166
+ *
+ */
 public class RSS {
 	
 	@XmlElement

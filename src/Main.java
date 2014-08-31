@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import view.MainPanel;
 
 /**
+ * Main class, create and show the UI.
+ * Program starts from here.
  * 
  * @author Sarun Wongtanakarn 5510546166
  *
