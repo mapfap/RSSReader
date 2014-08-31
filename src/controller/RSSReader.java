@@ -1,8 +1,7 @@
 package controller;
 
-import java.io.File;
+import java.net.URL;
 
-import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -14,7 +13,7 @@ public class RSSReader {
 	private static RSSReader instance = null;
 
 	private RSSReader() {
-
+		// Singleton
 	}
 
 	public static RSSReader getInstance() {
@@ -28,20 +27,13 @@ public class RSSReader {
 
 		JAXBContext ctx = JAXBContext.newInstance(RSS.class);
 		Unmarshaller unmarshaller = ctx.createUnmarshaller();
-		File file = new File("/Users/mapfap/Desktop/rss.xml");
-		Object obj = unmarshaller.unmarshal( file );
+		
+		ClassLoader loader = this.getClass().getClassLoader();
+		URL url = loader.getResource("res/rss.xml");
+		Object obj = unmarshaller.unmarshal( url );
 		RSS rss = (RSS) obj;
 		return rss;
 
 	}
-
-
-
-	// Test JAXB
-	//	public static void main(String[] args) {
-	//		RSS rss = (new RSSReader()).getRSS();
-	//		System.out.println(rss.getChannel().getItems().get(0).getDescription());
-	//	}
-
 
 }

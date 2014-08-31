@@ -2,11 +2,8 @@
 import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.ScrollPane;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
@@ -39,13 +36,10 @@ public class Main {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
 		JScrollPane scrollPane = new JScrollPane(new MainPanel());
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPane.setPreferredSize(new Dimension( 650, 800));
-//		scrollPane.add(new MainPanel());
 		frame.add(scrollPane);
-//		frame.add(new MainPanel());
 		
 		Dimension fixedDimension = new Dimension(650, 800);
 		
@@ -55,6 +49,5 @@ public class Main {
 
 		frame.pack();
 		frame.setVisible(true);
-		
 	}
 }
