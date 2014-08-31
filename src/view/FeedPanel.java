@@ -18,36 +18,40 @@ import model.RSS;
 import controller.RSSReader;
 
 /**
- * Main panel of the program, fetch and show the list of items.
+ * Feed panel of the program, fetch and show the list of items.
  * 
  * @author Sarun Wongtanakarn 5510546166
  *
  */
-public class MainPanel extends JPanel {
+public class FeedPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private Font font;
 	private boolean isFontConflicted;
+	private RSSReader rssReader;
 
-	public MainPanel() {
-		
+	public FeedPanel() {
 		loadFont();
 		setPreferredSize(new Dimension( 600, 10000));
-		
-		RSSReader rssReader = RSSReader.getInstance();
-		
+		rssReader = RSSReader.getInstance();
+	}
+	
+	public void fetchData(URL url) {
 		try {
-			RSS rss = rssReader.getRSS();
+			RSS rss = rssReader.getRSS(url);
 			Channel channel = rss.getChannel();
 			for (Item item : channel.getItems() )  {
 				add(new ItemBox(item));
 			}
-			
 		} catch (JAXBException e) {
 			JOptionPane.showMessageDialog(null, e.toString());
 		}
 	}
 	
+	public void clearItems() {
+		removeAll();
+	}
+
 	private void loadFont() {
 		try {
 			ClassLoader loader = this.getClass().getClassLoader();

@@ -29,14 +29,18 @@ public class RSSReader {
 		return instance;
 	}
 
-	public RSS getRSS() throws JAXBException {
+	/**
+	 * Get RSS object from specified URL.
+	 * 
+	 * @param url as source.
+	 * @return RSS object constructed from given source.
+	 * @throws JAXBException
+	 */
+	public RSS getRSS(URL url) throws JAXBException {
 
 		JAXBContext ctx = JAXBContext.newInstance(RSS.class);
 		Unmarshaller unmarshaller = ctx.createUnmarshaller();
-		
-		ClassLoader loader = this.getClass().getClassLoader();
-		URL url = loader.getResource("res/rss.xml");
-		Object obj = unmarshaller.unmarshal( url );
+		Object obj = unmarshaller.unmarshal(url);
 		RSS rss = (RSS) obj;
 		return rss;
 
