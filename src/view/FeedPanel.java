@@ -50,6 +50,9 @@ public class FeedPanel extends JPanel {
 		setPreferredSize(new Dimension( 600, items.size() * 100));
 
 		for (Item item : items)  {
+			if (item.getEnclosure() != null) {				
+				System.out.println("Enclosure detected: " + item.getEnclosure());
+			}
 			add(new ItemBox(item));
 		}
 	}

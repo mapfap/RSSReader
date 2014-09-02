@@ -6,14 +6,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-@XmlAccessorType (XmlAccessType.FIELD)
-
 /**
- * Channel data model of rss element.
+ * Channel data model of rss, contains many Items.
  * 
  * @author Sarun Wongtanakarn 5510546166
  *
  */
+@XmlAccessorType (XmlAccessType.FIELD)
 public class Channel {
 	
 	private String title;
@@ -25,16 +24,7 @@ public class Channel {
 	private String webMaster;
 	private String pubDate;
 	private String lastBuildDate;
-	private String category;
-	private String generator;
-	private String docs;
-	private String cloud;
-	private String ttl;
-	private String image;
-	private String rating;
-	private String textInput;
-	private String skipHours;
-	private String skipDays;
+	private int ttl;
 	
 	@XmlElement(name = "item")
 	private List<Item> items;
@@ -115,92 +105,20 @@ public class Channel {
 		this.lastBuildDate = lastBuildDate;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getGenerator() {
-		return generator;
-	}
-
-	public void setGenerator(String generator) {
-		this.generator = generator;
-	}
-
-	public String getDocs() {
-		return docs;
-	}
-
-	public void setDocs(String docs) {
-		this.docs = docs;
-	}
-
-	public String getCloud() {
-		return cloud;
-	}
-
-	public void setCloud(String cloud) {
-		this.cloud = cloud;
-	}
-
-	public String getTtl() {
-		return ttl;
-	}
-
-	public void setTtl(String ttl) {
-		this.ttl = ttl;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public String getRating() {
-		return rating;
-	}
-
-	public void setRating(String rating) {
-		this.rating = rating;
-	}
-
-	public String getTextInput() {
-		return textInput;
-	}
-
-	public void setTextInput(String textInput) {
-		this.textInput = textInput;
-	}
-
-	public String getSkipHours() {
-		return skipHours;
-	}
-
-	public void setSkipHours(String skipHours) {
-		this.skipHours = skipHours;
-	}
-
-	public String getSkipDays() {
-		return skipDays;
-	}
-
-	public void setSkipDays(String skipDays) {
-		this.skipDays = skipDays;
-	}
-
 	public List<Item> getItems() {
 		return items;
 	}
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	public int getTtl() {
+		return ttl;
+	}
+
+	public void setTtl(int ttl) {
+		this.ttl = ttl;
 	}
 	
 }

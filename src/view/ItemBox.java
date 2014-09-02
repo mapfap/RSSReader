@@ -49,9 +49,7 @@ public class ItemBox extends JLabel implements MouseListener {
 		return 	"<div style='"
 				+ "background: #" + hexColor + ";"
 				+ "width: " + boxWidth + "px;"
-				+ "padding: 10px;"
-				+ "font-size: 22px;"
-				+ "'>"
+				+ "padding: 10px; font-size: 22px; '>"
 				+ item.getTitle()
 				+ "</div>";
 	}
@@ -101,9 +99,7 @@ public class ItemBox extends JLabel implements MouseListener {
 		return "<div style='"
 				+ "background: #" + bodyHexColor + ";"
 				+ "width: " + boxWidth + "px;"
-				+ "padding: 10px;"
-				+ "font-size: 16px;"
-				+ "'>"
+				+ "padding: 10px; font-size: 16px;'>"
 				+ item.getDescription()
 				+ "</div>";
 	}

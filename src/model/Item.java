@@ -2,27 +2,28 @@ package model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-
-@XmlAccessorType (XmlAccessType.FIELD)
+import javax.xml.bind.annotation.XmlElement;
 
 /**
- * Item data model of rss element.
+ * Item data model of rss represents a story.
  * 
  * @author Sarun Wongtanakarn 5510546166
  *
  */
+@XmlAccessorType (XmlAccessType.FIELD)
 public class Item {
 	
 	private String title;
 	private String link;
 	private String description;
 	private String author;
-	private String category;
 	private String comments;
-	private String enclosure;
+	
+	@XmlElement
+	private Enclosure enclosure;
+	
 	private String guid;
 	private String pubDate;
-	private String source;
 	
 	public Item() {
 		
@@ -60,14 +61,6 @@ public class Item {
 		this.author = author;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	public String getComments() {
 		return comments;
 	}
@@ -76,11 +69,11 @@ public class Item {
 		this.comments = comments;
 	}
 
-	public String getEnclosure() {
+	public Enclosure getEnclosure() {
 		return enclosure;
 	}
 
-	public void setEnclosure(String enclosure) {
+	public void setEnclosure(Enclosure enclosure) {
 		this.enclosure = enclosure;
 	}
 
@@ -99,13 +92,5 @@ public class Item {
 	public void setPubDate(String pubDate) {
 		this.pubDate = pubDate;
 	}
-
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
-
+	
 }
