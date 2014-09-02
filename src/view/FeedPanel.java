@@ -28,7 +28,7 @@ public class FeedPanel extends JPanel {
 
 	public FeedPanel() {
 		setLayout(new FlowLayout());
-		setPreferredSize(new Dimension( 600, 5000));
+		setPreferredSize(new Dimension(600, 5000));
 		rssReader = RSSReader.getInstance();
 	}
 
@@ -47,7 +47,7 @@ public class FeedPanel extends JPanel {
 
 		add(new JLabel("  _  "));
 		List<Item> items = channel.getItems();
-		setPreferredSize(new Dimension( 600, items.size() * 100));
+		setPreferredSize(new Dimension( 600, items.size() * 300));
 
 		for (Item item : items)  {
 			if (item.getEnclosure() != null) {				
