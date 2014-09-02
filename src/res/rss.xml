@@ -23,7 +23,14 @@
           (right-click to open)
       </description>
       <link>http://www.github.com/mapfap/RSSReader/</link> 
-      </item>  
-
+    </item>
+    <item>
+      <title>Note</title>  
+      <description>
+          If your RSS contains HTML, it may break the layout of this program.
+      </description>
+      <link>http://www.mapfap.com/</link>  
+    </item>  
+     
   </channel> 
 </rss>

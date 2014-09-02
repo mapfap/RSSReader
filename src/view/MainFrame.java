@@ -117,7 +117,7 @@ public class MainFrame extends JFrame {
 	 */
 	private void alert(String text) {
 		urlTextField.setFocusable(false);
-		if( JOptionPane.showConfirmDialog( null, text, null, JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.OK_OPTION ) { 
+		if( JOptionPane.showConfirmDialog( null, text, null, JOptionPane.OK_CANCEL_OPTION, JOptionPane.ERROR_MESSAGE) == JOptionPane.OK_OPTION ) { 
 			urlTextField.setFocusable(true);
 		} else {
 			urlTextField.setFocusable(true);			
