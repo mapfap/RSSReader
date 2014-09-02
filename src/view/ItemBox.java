@@ -1,16 +1,22 @@
 package view;
 
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 import model.Item;
 
 /**
  * Box of UI that holds an Item of rss.
  * It can be expanded and collapsed by clicking.
+ * It suppose to place inside the feed panel.
  * 
  * @author Sarun Wongtanakarn 5510546166
  *
@@ -18,6 +24,11 @@ import model.Item;
 public class ItemBox extends JLabel implements MouseListener {
 
 	private static final long serialVersionUID = 2361705357295173302L;
+	private static final String normalHeadHexColor = "b3b3b3";
+	private static final String hoverHeadHexColor = "aabbcc";
+	private static final String bodyHexColor = "e2e2e2";
+	private static final int boxWidth = 480;
+
 	private final Item item;
 	private boolean isExpanding;
 
@@ -28,10 +39,10 @@ public class ItemBox extends JLabel implements MouseListener {
 		collapse();
 	}
 
-	private String getHeader(String hexColor) {
+	protected String getHeader(String hexColor) {
 		return 	"<div style='"
 				+ "background: #" + hexColor + ";"
-				+ "width: 480px;"
+				+ "width: " + boxWidth + "px;"
 				+ "padding: 10px;"
 				+ "font-size: 22px;"
 				+ "'>"
@@ -48,12 +59,12 @@ public class ItemBox extends JLabel implements MouseListener {
 	}
 
 	private void expand() {
-		setData(getHeader("b3b3b3") + getBody());
+		setData(getHeader(normalHeadHexColor) + getBody());
 		isExpanding = true;
 	}
 
 	private void collapse() {
-		setData(getHeader("b3b3b3"));
+		setData(getHeader(normalHeadHexColor));
 		isExpanding = false;
 	}
 
@@ -63,8 +74,8 @@ public class ItemBox extends JLabel implements MouseListener {
 
 	private String getBody() {
 		return "<div style='"
-				+ "background: #e2e2e2;"
-				+ "width: 480px;"
+				+ "background: #" + bodyHexColor + ";"
+				+ "width: " + boxWidth + "px;"
 				+ "padding: 10px;"
 				+ "font-size: 16px;"
 				+ "'>"
@@ -74,7 +85,20 @@ public class ItemBox extends JLabel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		toggleExpanding();
+		if (SwingUtilities.isRightMouseButton(e)) {
+			//			System.out.println("Go to site");
+			if(Desktop.isDesktopSupported()) {
+				try {
+					Desktop.getDesktop().browse(new URI(item.getLink()));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} else {
+			toggleExpanding();						
+		}
 	}
 
 	@Override
@@ -87,14 +111,14 @@ public class ItemBox extends JLabel implements MouseListener {
 	public void mouseEntered(MouseEvent e) {
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		if (!isExpanding) {
-			setData(getHeader("aabbcc"));
+			setData(getHeader(hoverHeadHexColor));
 		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (!isExpanding) {
-			setData(getHeader("b3b3b3"));
+			setData(getHeader(normalHeadHexColor));
 		}
 	}
 

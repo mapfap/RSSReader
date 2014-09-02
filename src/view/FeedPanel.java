@@ -1,14 +1,11 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
-import java.io.IOException;
+import java.awt.FlowLayout;
 import java.net.URL;
+import java.util.List;
 
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.xml.bind.JAXBException;
 
@@ -19,6 +16,7 @@ import controller.RSSReader;
 
 /**
  * Feed panel of the program, fetch and show the list of items.
+ * It suppose to place inside the main frame.
  * 
  * @author Sarun Wongtanakarn 5510546166
  *
@@ -26,48 +24,44 @@ import controller.RSSReader;
 public class FeedPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private Font font;
-	private boolean isFontConflicted;
 	private RSSReader rssReader;
 
 	public FeedPanel() {
-		loadFont();
-		setPreferredSize(new Dimension( 600, 10000));
+		setLayout(new FlowLayout());
+		setPreferredSize(new Dimension( 600, 5000));
 		rssReader = RSSReader.getInstance();
 	}
-	
-	public void fetchData(URL url) {
-		try {
-			RSS rss = rssReader.getRSS(url);
-			Channel channel = rss.getChannel();
-			for (Item item : channel.getItems() )  {
-				add(new ItemBox(item));
-			}
-		} catch (JAXBException e) {
-			JOptionPane.showMessageDialog(null, e.toString());
+
+	public void fetchData(URL url) throws JAXBException {
+		clearItems();
+		
+		RSS rss = rssReader.getRSS(url);
+		
+		Channel channel = rss.getChannel();
+		showChannelDetails(channel);
+
+		add(new JLabel("  _  "));
+		List<Item> items = channel.getItems();
+		setPreferredSize(new Dimension( 600, items.size() * 100));
+
+		for (Item item : items)  {
+			add(new ItemBox(item));
 		}
 	}
-	
+
+	private void showChannelDetails(Channel channel) {
+		Item mainItem = new Item();
+		mainItem.setTitle(channel.getTitle());
+		mainItem.setLink(channel.getLink());
+		mainItem.setDescription(channel.getDescription());
+		ItemBox mainItemBox = new ItemBox(mainItem);
+		mainItemBox.toggleExpanding();
+		add(mainItemBox);
+	}
+
 	public void clearItems() {
 		removeAll();
+		updateUI();
 	}
 
-	private void loadFont() {
-		try {
-			ClassLoader loader = this.getClass().getClassLoader();
-			URL url = loader.getResource("res/thaisansneue-regular-webfont.ttf");
-			font = Font.createFont(Font.TRUETYPE_FONT, new File(url.getFile()));
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			isFontConflicted = !ge.registerFont(font);
-
-		} catch (IOException|FontFormatException e) {
-			e.printStackTrace();
-		}
-		
-		if ( isFontConflicted ) {
-			setFont(new Font("ThaiSans Neue", Font.BOLD, 10));
-		} else {
-			setFont(font);
-		}
-	}
 }

@@ -1,4 +1,4 @@
-import view.MainFrame;
+package view;
 
 
 
