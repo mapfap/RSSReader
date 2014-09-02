@@ -32,6 +32,11 @@ public class FeedPanel extends JPanel {
 		rssReader = RSSReader.getInstance();
 	}
 
+	/**
+	 * Fetch RSS from specified URL and show them on UI.
+	 * @param url source of RSS. 
+	 * @throws JAXBException if the is a fault in unmarshalling.
+	 */
 	public void fetchData(URL url) throws JAXBException {
 		clearItems();
 		
@@ -49,6 +54,10 @@ public class FeedPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Show channel description like it's just a item.
+	 * @param channel to be displayed.
+	 */
 	private void showChannelDetails(Channel channel) {
 		Item mainItem = new Item();
 		mainItem.setTitle(channel.getTitle());
@@ -59,6 +68,9 @@ public class FeedPanel extends JPanel {
 		add(mainItemBox);
 	}
 
+	/**
+	 * Removes all item and repaint the swing components.
+	 */
 	public void clearItems() {
 		removeAll();
 		updateUI();

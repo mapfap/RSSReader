@@ -34,12 +34,12 @@ public class RSSReader {
 	 * 
 	 * @param url as source.
 	 * @return RSS object constructed from given source.
-	 * @throws JAXBException
+	 * @throws JAXBException if the is a fault in unmarshalling.
 	 */
 	public RSS getRSS(URL url) throws JAXBException {
 
-		JAXBContext ctx = JAXBContext.newInstance(RSS.class);
-		Unmarshaller unmarshaller = ctx.createUnmarshaller();
+		JAXBContext context = JAXBContext.newInstance(RSS.class);
+		Unmarshaller unmarshaller = context.createUnmarshaller();
 		Object obj = unmarshaller.unmarshal(url);
 		RSS rss = (RSS) obj;
 		return rss;

@@ -30,6 +30,9 @@ public class MainFrame extends JFrame {
 	private JButton fetchButton;
 	private JTextField urlTextField;
 
+	/**
+	 * Create and setup the main frame.
+	 */
 	public MainFrame() {
 		super("RSSReader");
 
@@ -79,6 +82,9 @@ public class MainFrame extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Load internal RSS file, contains guideline of the program.
+	 */
 	private void loadDefaultRSS() {
 		ClassLoader loader = this.getClass().getClassLoader();
 		URL url = loader.getResource("res/rss.xml");
@@ -89,6 +95,9 @@ public class MainFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * Fetch the data from URL acquired from text field.
+	 */
 	private void fetchData() {
 		try {
 			feedPanel.fetchData(new URL(urlTextField.getText()));
@@ -104,7 +113,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * This prevent users from get stuck with enter loop of alert.
 	 * 
-	 * @param text
+	 * @param text to display
 	 */
 	private void alert(String text) {
 		urlTextField.setFocusable(false);

@@ -39,6 +39,12 @@ public class ItemBox extends JLabel implements MouseListener {
 		collapse();
 	}
 
+	/**
+	 * Get HTML text for head part of item box.
+	 * 
+	 * @param hexColor specifies background color using hexcode.
+	 * @return HTML String for head part of item box.
+	 */
 	protected String getHeader(String hexColor) {
 		return 	"<div style='"
 				+ "background: #" + hexColor + ";"
@@ -50,6 +56,9 @@ public class ItemBox extends JLabel implements MouseListener {
 				+ "</div>";
 	}
 
+	/**
+	 * Toggle the item box to expand or collapse.
+	 */
 	public void toggleExpanding() {
 		if (isExpanding) {
 			collapse();
@@ -58,20 +67,36 @@ public class ItemBox extends JLabel implements MouseListener {
 		}
 	}
 
+	/**
+	 * Expands the item box to show description.
+	 */
 	private void expand() {
 		setData(getHeader(normalHeadHexColor) + getBody());
 		isExpanding = true;
 	}
 
+	/**
+	 * Collapses the item box to hide the description.
+	 */
 	private void collapse() {
 		setData(getHeader(normalHeadHexColor));
 		isExpanding = false;
 	}
 
+	/**
+	 * Set HTML text to JLabel.
+	 * @param data
+	 */
 	private void setData(String data) {
 		setText("<html>" + data  + "</html>");
 	}
 
+	/**
+	 * Get HTML String for body part of item box.
+	 * 
+	 * @param hexColor specifies background color using hexcode.
+	 * @return HTML String for body part of item box.
+	 */
 	private String getBody() {
 		return "<div style='"
 				+ "background: #" + bodyHexColor + ";"
@@ -83,10 +108,13 @@ public class ItemBox extends JLabel implements MouseListener {
 				+ "</div>";
 	}
 
+	/**
+	 * Left Click to toggle expanding.
+	 * Right Click to open a web browser.
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (SwingUtilities.isRightMouseButton(e)) {
-			//			System.out.println("Go to site");
 			if(Desktop.isDesktopSupported()) {
 				try {
 					Desktop.getDesktop().browse(new URI(item.getLink()));
@@ -107,6 +135,9 @@ public class ItemBox extends JLabel implements MouseListener {
 	@Override
 	public void mouseReleased(MouseEvent e) { }
 
+	/**
+	 * Implements hover, likes in CSS.
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -115,6 +146,9 @@ public class ItemBox extends JLabel implements MouseListener {
 		}
 	}
 
+	/**
+	 * Cancel hover action. 
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (!isExpanding) {
