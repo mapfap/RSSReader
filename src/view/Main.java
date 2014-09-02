@@ -1,7 +1,5 @@
 package view;
 
-
-
 /**
  * Main class, create the main JFrame.
  * Program starts from here.

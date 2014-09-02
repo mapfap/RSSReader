@@ -36,15 +36,38 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		super("RSSReader");
 
-		setLayout(new FlowLayout());
+		initUI();
+		setListeners();
+		
+		loadDefaultRSS();
 
+		pack();
+		setVisible(true);
+	}
+	
+	private void initUI() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new FlowLayout());
+		
 		feedPanel = new FeedPanel();
+		fetchButton = new JButton("Fetch");
+		urlTextField = new JTextField(40);
+		
 		JScrollPane scrollPane = new JScrollPane(feedPanel);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-		scrollPane.setPreferredSize(new Dimension( 650, 800));
-		fetchButton = new JButton("Fetch");
+		scrollPane.setPreferredSize(new Dimension(650, 800));
 
-		urlTextField = new JTextField(40);
+		add(new JLabel("Enter URL of the RSS feed"));
+		add(urlTextField);
+		add(fetchButton);
+		add(scrollPane);
+
+		Dimension fixedDimension = new Dimension(650, 800);
+		setPreferredSize(fixedDimension);
+		setResizable(false);
+	}
+
+	private void setListeners() {
 		urlTextField.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -56,30 +79,11 @@ public class MainFrame extends JFrame {
 		});
 
 		fetchButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {			
 				fetchData();
 			}
-
 		});
-
-		add(new JLabel("Enter URL of the RSS feed"));
-		add(urlTextField);
-		add(fetchButton);
-		add(scrollPane);
-
-		loadDefaultRSS();
-
-		Dimension fixedDimension = new Dimension(650, 800);
-		setPreferredSize(fixedDimension);
-		setMinimumSize(fixedDimension);
-		setMaximumSize(fixedDimension);
-		setResizable(false);
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pack();
-		setVisible(true);
 	}
 
 	/**
@@ -102,7 +106,7 @@ public class MainFrame extends JFrame {
 		try {
 			feedPanel.fetchData(new URL(urlTextField.getText()));
 		} catch (JAXBException e) {
-			alert("Invalid RSS format");
+			alert("Invalid RSS format or no Internet Connection");
 			loadDefaultRSS();
 		} catch (MalformedURLException ex) {
 			alert("Invalid URL");
