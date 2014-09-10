@@ -17,6 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.xml.bind.JAXBException;
 
+import controller.RSSReader;
+
 /**
  * Main JFrame, holds whole application in it.
  * 
@@ -29,13 +31,16 @@ public class MainFrame extends JFrame {
 	private FeedPanel feedPanel;
 	private JButton fetchButton;
 	private JTextField urlTextField;
+	private RSSReader rssReader;
 
 	/**
 	 * Create and setup the main frame.
+	 * @param rssReader a controller for fetching rss.
 	 */
-	public MainFrame() {
+	public MainFrame(RSSReader rssReader) {
 		super("RSSReader");
 
+		this.rssReader = rssReader;
 		initUI();
 		setListeners();
 		
@@ -49,7 +54,7 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		
-		feedPanel = new FeedPanel();
+		feedPanel = new FeedPanel(rssReader);
 		fetchButton = new JButton("Fetch");
 		urlTextField = new JTextField(40);
 		

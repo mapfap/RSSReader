@@ -26,10 +26,10 @@ public class FeedPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private RSSReader rssReader;
 
-	public FeedPanel() {
+	public FeedPanel(RSSReader rssReader) {
 		setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(600, 5000));
-		rssReader = RSSReader.getInstance();
+		this.rssReader = rssReader;
 	}
 
 	/**
